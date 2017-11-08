@@ -1,5 +1,8 @@
 {
   "name": "bluetooth-serial",
-  "app_id": "",
-  "type": "ionic-angular"
+  "app_id": "com.ionic.bluetoothserial",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

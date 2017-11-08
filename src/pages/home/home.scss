@@ -1,3 +1,19 @@
 page-home {
-
+    .mainContent{
+        background-color: map-get($colors, light);
+    }
+    .statusLabel{
+        background-color: #ebebeb;
+        width: 100%;
+    }
+    .infoContent{
+        display: flex;
+        margin-top: 50%;
+    }
+    .infoLabel{
+        margin: auto;
+        font-size: 28px;
+        color: map-get($colors, primary);
+        text-align: center;
+    }
 }

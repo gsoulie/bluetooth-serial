@@ -1,0 +1,17 @@
+page-test {
+    .top{
+        height: 50%;
+        background-color: #e3e3e3;
+    }
+    .bottom{
+        height: 50%;
+        background-color: #e3b5e5;
+    }
+    .val{
+        overflow: scroll;
+        height: 100%;
+    }
+    .no-scroll{
+        overflow: hidden;
+    }
+}

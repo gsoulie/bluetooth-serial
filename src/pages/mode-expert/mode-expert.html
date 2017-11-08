@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>
+      {{ btName }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-item no-lines class="frame">
+    <ion-textarea placeholder="Hexadecimal frame..." clearInput="true" [(ngModel)]="stringToWrite"></ion-textarea>
+    <button ion-button clear item-right class="clearButton" text-center (click)="onClearFrame()">
+      CLEAR
+    </button>
+  </ion-item>
+  <button ion-button clear color="primary" (click)="onWrite()">WRITE</button> 
+  <button ion-button clear color="primary" (click)="onRead()">READ</button> 
+  <button ion-button clear color="primary" (click)="onWriteTestValue()">WRITE TEST</button> 
+  <button ion-button clear>
+    <a href="mailto:gsoulie.isimedia@gmail.com?Subject=BT&body={{output}}">LOG</a>        
+  </button>
+  <button ion-button clear color="primary" (click)="onCleanTrace()">CLEAN TRACE</button> 
+  <p class="pClass">{{ output }}</p>
+</ion-content>

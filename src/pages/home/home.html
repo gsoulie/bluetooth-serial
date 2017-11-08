@@ -1,14 +1,52 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>
-      Ionic Blank
+      Blue-Read Serial
     </ion-title>
+    <ion-buttons end>
+      <button ion-button clear default (click)="onScan()" *ngIf="btEnabled">SCAN</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+<ion-content class="mainContent" no-bounce no-scroll>
+  <ion-refresher (ionRefresh)="onScan($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item *ngIf="!btEnabled" no-lines>
+    <ion-label><b>Bluetooth is disabled</b></ion-label>
+    <button ion-button clear default item-right color="primary" (click)="onEnableBluetooth()">ENABLE</button>
+  </ion-item>
+  <div class="infoContent" *ngIf="!btEnabled">
+    <ion-label class="infoLabel" text-center>No Bluetooth connection found !</ion-label>
+  </div>
+
+  <div *ngIf="btEnabled">
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>
+          Bluetooth devices
+        </ion-card-title>
+        <ion-list *ngFor="let o of devices">
+          <ion-item>
+            <b>{{o.name || 'Unnamed'}}</b><br>
+            <font class="title">Address : </font><font class="value">{{o.address}}</font><br>
+            <button ion-button item-right color="dark" (click)="onConnect(o)" *ngIf="!blueReadConnected">CONNECT</button> 
+            <button ion-button item-right color="dark" (click)="onDisconnect()" *ngIf="blueReadConnected">DISCONNECT</button> 
+          </ion-item>
+        </ion-list>
+        <ion-item>
+          <ion-label stacked>Mac or Bluetooth Address</ion-label>
+          <ion-input clearInput="true" [(ngModel)]="macAddress" type="text"></ion-input>
+          <button ion-button color="dark" (click)="onConnectMac(macAddress)" item-right *ngIf="!blueReadConnected">CONNECT</button> 
+          <button ion-button color="dark" (click)="onDisconnect()" *ngIf="blueReadConnected">DISCONNECT</button> 
+        </ion-item>
+        <button ion-button color="primary" clear (click)="isConnected()" *ngIf="blueReadConnected">BLUE-READ STATUS</button> 
+        <button ion-button color="primary" clear (click)="onOpenModeExpert()" *ngIf="blueReadConnected">MODE EXPERT</button> 
+      </ion-card-content>
+    </ion-card>
+  </div>
+    
+  </ion-content>
+

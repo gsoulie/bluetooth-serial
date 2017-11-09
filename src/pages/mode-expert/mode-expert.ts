@@ -25,17 +25,10 @@ export class ModeExpertPage  implements OnInit{
               private file: File,
               private utils: crc) {
         
-        this.utils.CRCMaster.init();
-        this.btName = this.navParams.get("btName");
+        this.utils.CRCMaster.init();  //init CRC lib
+        this.btName = this.navParams.get("btName"); 
         this.btMac = this.navParams.get("btMac");
-        this.bluetoothSerial.clear();
-
-    /*this.bluetoothSerial.subscribeRawData().subscribe(
-      (data) => {
-      },
-      (error) => {
-        this.output += "\r\nReception error : " + JSON.stringify(error) + "\r\n";
-    });*/
+        this.bluetoothSerial.clear(); // clear bluetooth buffer because it may contains connection response frame
   }
   
   ngOnInit(){
@@ -63,14 +56,9 @@ export class ModeExpertPage  implements OnInit{
   }
 
   /**
-   * Write hard-coded stream to bluettoth device
-   * test frame : FF 01 DE D1 00 01 04 01 01 01 04             
+   * Build the complete frame with its SOH + CRC + Session number + Size + Payload + EOT
+   * @param frame : frame's payload
    */
-  onWriteTestValue(){
-   this.stringToWrite = "010101";
-   this.onWrite();
-  }
-
   onBuildFrame(frame){
     let full_frame = this.utils.calculateFrameSize(frame) + frame
     return this.frame_start + this.utils.CRCMaster.Calculate(full_frame,"hex") + this.frame_session + this.utils.calculateFrameSize(frame) + frame + this.frame_end;
@@ -81,7 +69,6 @@ export class ModeExpertPage  implements OnInit{
    */
   onRawData(){
     this.output += "Rx : ";
-    //this.buffer = ""; // clean output buffer
     this.bluetoothSerial.subscribeRawData().subscribe(
       (data) => {
         var temp = new Uint8Array(data);

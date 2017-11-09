@@ -41,7 +41,7 @@ export class HomePage {
   /**
    * Scan for bounded devices and just displaying devices which name contains "BLUE-READ"
    */
-  onScan(){
+  onScan(refresher = null){
     this.devices = [];
     this.bluetoothSerial.list()
     .then(data => {
@@ -50,6 +50,7 @@ export class HomePage {
           this.devices.push(data[i]);
         }
       }
+      if(refresher){refresher.complete();}
     })
     .catch(error => {
       alert(JSON.stringify(error));

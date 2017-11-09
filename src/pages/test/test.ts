@@ -15,7 +15,7 @@ export class TestPage {
     
     this.utils.CRCMaster.init();
     var res = this.utils.CRCMaster.Calculate("060102021404","hex");
-    console.log("RES = " + res);
+    console.log("RES = " + res.crccittxmodem);
     
     //CRCMaster.Calculate("060102021404","hex")
     

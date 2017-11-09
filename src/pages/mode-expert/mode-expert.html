@@ -11,15 +11,17 @@
   <ion-item no-lines class="frame">
     <ion-textarea placeholder="Hexadecimal frame..." clearInput="true" [(ngModel)]="stringToWrite"></ion-textarea>
     <button ion-button clear item-right class="clearButton" text-center (click)="onClearFrame()">
-      CLEAR
+      <ion-icon name="md-close"></ion-icon>
     </button>
   </ion-item>
-  <button ion-button clear color="primary" (click)="onWrite()">WRITE</button> 
-  <button ion-button clear color="primary" (click)="onRead()">READ</button> 
-  <button ion-button clear color="primary" (click)="onWriteTestValue()">WRITE TEST</button> 
-  <button ion-button clear>
+  <ion-toolbar>
+      <button ion-button color="primary" (click)="onWrite()" class="leftButton">WRITE</button> 
+      <button ion-button outline color="primary" (click)="onRead()">READ</button> 
+      <button ion-button clear color="primary" (click)="onCleanTrace()" [style.float]="'right'">CLEAN TRACE</button> 
+  </ion-toolbar>
+  
+  <!--<button ion-button clear>
     <a href="mailto:gsoulie.isimedia@gmail.com?Subject=BT&body={{output}}">LOG</a>        
-  </button>
-  <button ion-button clear color="primary" (click)="onCleanTrace()">CLEAN TRACE</button> 
+  </button>-->
   <p class="pClass">{{ output }}</p>
 </ion-content>
